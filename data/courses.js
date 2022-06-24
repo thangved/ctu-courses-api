@@ -1520,6 +1520,10 @@ const courses = [
 		key: 'CT190',
 	},
 	{
+		name: 'Quy hoạch tuyến tính',
+		key: 'CT199',
+	},
+	{
 		name: 'Nền tảng công nghệ thông tin',
 		key: 'CT200',
 	},
