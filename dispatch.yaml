@@ -1,0 +1,9 @@
+dispatch:
+    - url: 'w5team.com/*'
+      service: default
+
+    - url: 'api.w5team.com/*'
+      service: api
+
+    - url: 'api.tools.w5team.com/*'
+      service: tools
