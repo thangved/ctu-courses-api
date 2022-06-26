@@ -18,7 +18,9 @@ const findByKey = async (payload) => {
 		);
 
 		return convertHTML(res.data);
-	} catch (error) {}
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 module.exports = findByKey;

@@ -26,6 +26,7 @@ const convertHTML = (data) => {
 			week: tds[8].innerHTML.replace(/&.+;/g, ''),
 			id: tds[1].innerHTML.replace(/&.+;/g, ''),
 			member: parseInt(tds[6].innerHTML.replace(/&.+;/g, '')),
+			available: parseInt(tds[7].innerHTML.replace(/&.+;/g, '')),
 			name,
 			time: [
 				{
