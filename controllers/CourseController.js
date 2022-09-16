@@ -1,13 +1,18 @@
+const CourseModel = require('~/models/CourseModel');
 const findByKey = require('~/utils/findByKey');
 
 class CourseController {
-	searchByName(req, res) {
-		const courses = require('~/data/courses').filter(
-			(course) =>
-				course.name.toLowerCase().includes(req.params.q.toLowerCase()) ||
-				course.key.toLowerCase().includes(req.params.q.toLowerCase())
-		);
-
+	async searchByName(req, res) {
+		const courses = await CourseModel.find({
+			$or: [
+				{
+					name: new RegExp(req.params.q, 'i'),
+				},
+				{
+					key: new RegExp(req.params.q, 'i'),
+				},
+			],
+		});
 		res.send(courses);
 	}
 
@@ -43,22 +48,54 @@ class CourseController {
 			const cmbHocKy = parseInt(req.query.n);
 			const cmbNamHoc = parseInt(req.query.y.slice(4));
 			const txtMaMH = req.params.key;
-			const flag = 1;
-			const Button = 'Tìm';
-			const curPage = '+';
-			const txtUserID = '';
 
 			const course = await findByKey({
 				cmbHocKy,
 				cmbNamHoc,
 				txtMaMH,
-				curPage,
-				flag,
-				Button,
-				txtUserID,
 			});
 
 			res.send(course);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	async requestAddCourse(req, res) {
+		try {
+			const { key, name, weight } = req.body;
+
+			const cmbNamHoc = new Date().getFullYear();
+			const cmbHocKy = 1;
+			const txtMaMH = key;
+
+			const isExisting = await CourseModel.findOne({ key: new RegExp(key, '') });
+
+			if (isExisting) {
+				return res.status(404).send({
+					success: false,
+					message: 'Học phần đã tồn tại trong hệ thống',
+				});
+			}
+
+			const courses = await findByKey({ cmbHocKy, cmbNamHoc, txtMaMH });
+
+			if (!courses?.length) {
+				return res.status(404).send({
+					success: false,
+					message:
+						'Chúng tôi không tìm thấy học phần này trên hệ thống của trường Đại học Cần Thơ',
+				});
+			}
+
+			const course = courses[0];
+
+			await CourseModel.create(course);
+
+			res.send({
+				success: true,
+				message: `Yêu cầu thêm học phần "${course.name}" thành công`,
+			});
 		} catch (error) {
 			console.log(error);
 		}
