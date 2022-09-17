@@ -55,7 +55,7 @@ class CourseController {
 				txtMaMH,
 			});
 
-			res.send(course);
+			res.send(course || []);
 		} catch (error) {
 			console.log(error);
 		}

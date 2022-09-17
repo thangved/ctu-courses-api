@@ -15,14 +15,14 @@ const convertHTML = (data) => {
 		const tbody = table.querySelector('tbody');
 		const trs = tbody.querySelectorAll('tr');
 
-		const _classes = [];
+		const __classes = [];
 
 		trs.forEach((tr, index) => {
 			if (index === 0) return;
 
 			const tds = tr.querySelectorAll('td');
 
-			_classes.push({
+			__classes.push({
 				key,
 				class: tds[9].innerHTML.replace(/&.+;/g, ''),
 				week: tds[8].innerHTML.replace(/&.+;/g, ''),
@@ -30,7 +30,7 @@ const convertHTML = (data) => {
 				member: parseInt(tds[6].innerHTML.replace(/&.+;/g, '')),
 				available: parseInt(tds[7].innerHTML.replace(/&.+;/g, '')),
 				name,
-				weight: courses.find((course) => course.key === key).weight,
+				weight: courses.find((course) => course.key === key)?.weight,
 				time: [
 					{
 						start: parseInt(tds[3].innerHTML.replace(/&.+;/g, '')),
@@ -44,7 +44,7 @@ const convertHTML = (data) => {
 
 		let classes = [];
 
-		_classes.forEach((cl) => {
+		__classes.forEach((cl) => {
 			if (classes.find((c) => c.id === cl.id)) {
 				classes = classes.map((c) => {
 					if (c.id !== cl.id) return c;
@@ -61,7 +61,9 @@ const convertHTML = (data) => {
 		});
 
 		return classes;
-	} catch (error) {}
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 module.exports = convertHTML;
