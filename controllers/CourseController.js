@@ -78,7 +78,10 @@ class CourseController {
 				});
 			}
 
-			const courses = await findByKey({ cmbHocKy, cmbNamHoc, txtMaMH });
+			const courses = [
+				...(await findByKey({ cmbHocKy, cmbNamHoc, txtMaMH })),
+				...(await findByKey({ cmbHocKy, cmbNamHoc: cmbNamHoc + 1, txtMaMH })),
+			];
 
 			if (!courses?.length) {
 				return res.status(404).send({
