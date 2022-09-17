@@ -62,7 +62,7 @@ const convertHTML = (data) => {
 
 		return classes;
 	} catch (error) {
-		console.log(error);
+		return [];
 	}
 };
 

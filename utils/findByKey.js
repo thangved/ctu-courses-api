@@ -27,7 +27,7 @@ const findByKey = async ({
 
 		return convertHTML(res.data);
 	} catch (error) {
-		console.log(error);
+		return [];
 	}
 };
 
