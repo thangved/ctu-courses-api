@@ -63,15 +63,15 @@ class CourseController {
 
 	async requestAddCourse(req, res) {
 		try {
-			const { key, name, weight } = req.body;
+			const { key } = req.body;
 
 			const cmbNamHoc = new Date().getFullYear();
 			const cmbHocKy = 1;
 			const txtMaMH = key;
 
-			const isExisting = await CourseModel.findOne({ key: new RegExp(key, '') });
+			const isExisting = await CourseModel.findOne({ key: new RegExp(key, 'i') });
 
-			if (isExisting) {
+			if (!!isExisting) {
 				return res.status(404).send({
 					success: false,
 					message: 'Học phần đã tồn tại trong hệ thống',
