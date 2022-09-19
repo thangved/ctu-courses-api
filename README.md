@@ -10,7 +10,7 @@ Ngoài ra các bạn muốn tự triển khai server riêng thì clone repo này
 
 ### request
 
-path: /courses/search/:q
+path: GET `/courses/search/:q`
 
 ### response
 
@@ -36,7 +36,7 @@ path: /courses/search/:q
 
 ### request
 
-- path: POST /courses/key/:key
+- path: GET `/courses/key/:key`
 - query:
   - y: Năm học (Ví dụ: năm học 2020 - 2021 thì sẽ ghi là 20202021)
   - n: học kỳ (1, 2, 3)
@@ -85,7 +85,7 @@ path: /courses/search/:q
 
 ### request
 
-- path: POST /courses/request-add-course
+- path: POST `/courses/request-add-course`
 - body:
 
 ```json
