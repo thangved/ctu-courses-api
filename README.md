@@ -80,3 +80,20 @@ path: /courses/search/:q
   ...
 ]
 ```
+
+## Yêu cầu thêm môn học
+
+### request
+
+path: /courses/request-add-course
+body:
+
+```json
+{
+  "key": "string" // Mã học phần
+}
+```
+
+### response
+- success: 200
+- failed: 404
