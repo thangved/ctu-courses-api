@@ -36,7 +36,7 @@ path: /courses/search/:q
 
 ### request
 
-- path: /courses/key/:key
+- path: POST /courses/key/:key
 - query:
   - y: Năm học (Ví dụ: năm học 2020 - 2021 thì sẽ ghi là 20202021)
   - n: học kỳ (1, 2, 3)
@@ -85,8 +85,8 @@ path: /courses/search/:q
 
 ### request
 
-path: /courses/request-add-course
-body:
+- path: POST /courses/request-add-course
+- body:
 
 ```json
 {
