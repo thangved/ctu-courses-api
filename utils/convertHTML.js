@@ -9,7 +9,10 @@ const convertHTML = (data) => {
 
 		const table = document.querySelectorAll('table')[5];
 
+		const weight = document.body.innerHTML.split('Tín chỉ : ')[1]?.split(' TC')[0];
+
 		const name = document.querySelectorAll('td')[12].innerHTML.split(': ')[1].split('\t')[0];
+
 		const key = document.querySelectorAll('td')[11].innerHTML.split(': ')[1].split('\t')[0];
 
 		const tbody = table.querySelector('tbody');
@@ -30,7 +33,7 @@ const convertHTML = (data) => {
 				member: parseInt(tds[6].innerHTML.replace(/&.+;/g, '')),
 				available: parseInt(tds[7].innerHTML.replace(/&.+;/g, '')),
 				name,
-				weight: courses.find((course) => course.key === key)?.weight,
+				weight: courses.find((course) => course.key === key)?.weight || weight,
 				time: [
 					{
 						start: parseInt(tds[3].innerHTML.replace(/&.+;/g, '')),
